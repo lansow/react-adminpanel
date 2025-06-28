@@ -1,17 +1,36 @@
-import Dashboard from "@/component/dashboard/Dashboard";
-import { Route, Routes } from "react-router-dom";
+// routes/ProtectedRoutes.jsx
+import { Routes, Route, Navigate } from "react-router-dom";
+import { useAuth } from "@/auth/AuthContext";
+import { items as routes } from "@/component/data/routes";
 
-export default function router() {
+const ProtectedRoute = ({ element, requiredRoles }) => {
+  const { user } = useAuth();
+
+  if (
+    !requiredRoles ||
+    requiredRoles.some((role) => user?.roles?.includes(role))
+  ) {
+    return element;
+  }
+
+  return <Navigate to='/unauthorized' replace />;
+};
+
+export default function ProtectedRoutes() {
   return (
-    <>
-      <Routes>
-        <Route path='/' element={<Dashboard />} />
-        {/* <Route path='/pepole' element={<List />} />
-                <Route path='/pepole/add' element={<Add />} />
-                <Route path='/pepole/:id' element={<Detail />} />
-                <Route path='/' />
-                <Route path='/' /> */}
-      </Routes>
-    </>
+    <Routes>
+      {routes.map((route) => (
+        <Route
+          key={route.id}
+          path={route.path}
+          element={
+            <ProtectedRoute
+              element={route.element}
+              requiredRoles={route.requiredRoles}
+            />
+          }
+        />
+      ))}
+    </Routes>
   );
 }

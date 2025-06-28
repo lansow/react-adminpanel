@@ -1,15 +1,15 @@
 @font-face {
-    font-family: vazir;
-    src: url(../fonts/Vazir.ttf);
+  font-family: vazir;
+  src: url(../fonts/Vazir.ttf);
 }
 
 body {
-    font-family: vazir;
+  font-family: vazir;
 }
 
 .content {
-    background-color: #fff;
-    margin: 1rem;
-    padding: 1rem;
-    min-height: 100vh;
+  background-color: #fff;
+  margin: 1rem;
+  padding: 1rem;
+  min-height: 150vh;
 }

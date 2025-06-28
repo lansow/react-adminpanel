@@ -1,7 +1,8 @@
 import { Menu as AntMenu } from "@/ui";
 import { useAuth } from "@/auth/AuthContext";
+import { items } from "@/component/data/menu";
 
-export function Menu({ dSK, dOK, mode, items }) {
+export function Menu({ dSK, dOK, mode }) {
   const { user } = useAuth();
 
   // تابع بازگشتی برای فیلتر آیتم‌های منو
